@@ -40,10 +40,9 @@ var app = builder.Build();
     // global error handler
     app.UseMiddleware<ErrorHandlerMiddleware>();
 
-
-    app.MapControllers();
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.MapControllers();
 }
 
-app.Run("http://localhost:9080");
+app.Run();
