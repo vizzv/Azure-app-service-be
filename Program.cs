@@ -10,7 +10,6 @@ var builder = WebApplication.CreateBuilder(args);
     var env = builder.Environment;
  
     services.AddDbContext<DataContext>();
-    services.AddCors();
     services.AddControllers().AddJsonOptions(x =>
     {
         // serialize enums as strings in api responses (e.g. Role)
