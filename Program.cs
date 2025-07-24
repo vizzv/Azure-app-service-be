@@ -25,6 +25,15 @@ var builder = WebApplication.CreateBuilder(args);
     services.AddScoped<IUserService, UserService>();
     services.AddEndpointsApiExplorer();
     services.AddSwaggerGen();
+    services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontendApp", builder =>
+    {
+        builder.WithOrigins("https://green-flower-0dfce0b0f.1.azurestaticapps.net")
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    });
+});
 }
 
 var app = builder.Build();
@@ -32,10 +41,7 @@ var app = builder.Build();
 // configure HTTP request pipeline
 {
     // global cors policy
-    app.UseCors(x => x
-        .AllowAnyOrigin()
-        .AllowAnyMethod()
-        .AllowAnyHeader());
+app.UseCors("AllowFrontendApp");
 
     // global error handler
     app.UseMiddleware<ErrorHandlerMiddleware>();
