@@ -15,7 +15,14 @@ public class DataContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder options)
     {
         // connect to postgres with connection string from app settings
-        options.UseNpgsql(Configuration.GetConnectionString("ApiDatabase"))
+         var host = Environment.GetEnvironmentVariable("DB_HOST");
+    var db = Environment.GetEnvironmentVariable("DB_NAME");
+    var user = Environment.GetEnvironmentVariable("DB_USER");
+    var password = Environment.GetEnvironmentVariable("DB_PASSWORD");
+
+    var connectionString = $"Host={host};Database={db};Username={user};Password={password}";
+
+        options.UseNpgsql(connectionString)
         .UseSnakeCaseNamingConvention();
     }
 
