@@ -31,6 +31,7 @@ var builder = WebApplication.CreateBuilder(args);
         builder.WithOrigins("https://green-flower-0dfce0b0f.1.azurestaticapps.net")
                .AllowAnyMethod()
                .AllowAnyHeader();
+               .AllowCredentials();
     });
 });
 }
