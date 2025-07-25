@@ -43,22 +43,6 @@ var app = builder.Build();
     // global cors policy
 app.UseCors("AllowFrontendApp");
 
-app.Use(async (context, next) =>
-{
-    var tokenFromHeader = context.Request.Headers["X-Frontend-Secret"].FirstOrDefault();
-    var expectedToken =  Environment.GetEnvironmentVariable("SECRET");
-
-    if (tokenFromHeader == expectedToken)
-    {
-        await next.Invoke();
-    }
-    else
-    {
-        context.Response.StatusCode = 403;
-        await context.Response.WriteAsync("Forbidden: Invalid frontend token");
-    }
-});
-
     // global error handler
     app.UseMiddleware<ErrorHandlerMiddleware>();
 
