@@ -21,7 +21,7 @@ public class DataContext : DbContext
     var password = Environment.GetEnvironmentVariable("DB_PASSWORD");
 
     var connectionString = $"Host={host};Database={db};Username={user};Password={password}";
-
+    Console.WriteLine(connectionString);
         options.UseNpgsql(connectionString)
         .UseSnakeCaseNamingConvention();
     }
